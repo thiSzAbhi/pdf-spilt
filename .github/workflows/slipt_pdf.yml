@@ -1,0 +1,33 @@
+name: Split PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      pdf_file:
+        description: 'Path to the PDF file in the repository'
+        required: true
+        default: 'input.pdf'
+      max_size:
+        description: 'Maximum size of each split PDF in MB'
+        required: true
+        default: '10'
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install PyPDF2
+
+      - name: Split PDF
+        run: |
+          python split_pdf.py ${{ github.event.inputs.pdf_file }} ${{ github.event.inputs.max_size }}
