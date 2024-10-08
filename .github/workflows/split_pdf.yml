@@ -31,10 +31,6 @@ jobs:
         run: |
           curl -L -o input.pdf ${{ github.event.inputs.pdf_url }}
 
-      - name: List files
-        run: |
-          ls -la scripts  # This will list the contents of the scripts directory
-
       - name: Split PDF
         run: |
-          python scripts/split_pdf.py input.pdf ${{ github.event.inputs.max_size }}
+          python split_pdf.py input.pdf ${{ github.event.inputs.max_size }}
