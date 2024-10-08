@@ -33,4 +33,4 @@ jobs:
 
       - name: Split PDF
         run: |
-          python split_pdf.py input.pdf ${{ github.event.inputs.max_size }}
+          python scripts/split_pdf.py input.pdf ${{ github.event.inputs.max_size }}  # Update this path if needed
